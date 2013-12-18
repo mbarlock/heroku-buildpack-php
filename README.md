@@ -15,15 +15,18 @@ The config files are bundled with the build pack itself:
 Pre-compiling binaries
 ----------------------
 
-On a Heroku Dyno, one can run the following as executable text.  After
-running it, `/app` will contain, among other entities,
-`apache-2.2.25-1.tar.gz`, `php-5.3.27-1.tar.gz`, and
-`mcrypt-2.5.8-1.tar.gz` which should be uploaded to a location that
+On a 64-bit Ubuntu 10.04 machine, one can run the following as executable text.
+After running it, `/app` will contain, among other entities,
+`apache-2.2.26-2.tar.gz`, `php-5.3.27-2.tar.gz`, and
+`mcrypt-2.5.8-2.tar.gz` which should be uploaded to a location that
 can be downloaded by the build pack (see the URIs in `compile`).
 
     #!/bin/bash
     set -uex
     cd /tmp
+
+    apt-get install -y make g++ gcc libtool libxml2-dev libssl-dev \
+        libcurl4-openssl-dev libpng-dev libmysqlclient-dev libpq-dev
 
     # Heroku revision.  Must match in 'compile' program.
     #
@@ -59,7 +62,7 @@ can be downloaded by the build pack (see the URIs in `compile`).
     popd
 
     # Take care of vendoring Apache.
-    httpd_version=2.2.25
+    httpd_version=2.2.26
     httpd_dirname=httpd-$httpd_version
     httpd_archive_name=$httpd_dirname.tar.bz2
 
