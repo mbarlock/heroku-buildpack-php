@@ -25,16 +25,6 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 
-## Install mod_parp
-wget http://superb-dca2.dl.sourceforge.net/project/parp/mod_parp-0.12-src.tar.gz
-tar xvzf mod_parp-0.12-src.tar.gz
-/app/apache/bin/apxs -i -c -I . mod_parp-0.12/apache2/mod_parp.c
-
-## Install mod_auth
-wget http://softlayer-ams.dl.sourceforge.net/project/auth-openid/mod_auth_oid-2.2-src.tar.gz
-tar xvzf mod_auth_oid-2.2-src.tar.gz
-/app/apache/bin/apxs -i -c -I . -D AOID_MOD_EXT_HOOKS mod_auth_oid-2.2/apache2/mod_auth_oid.c -lcrypto
-
 # include .files when moving things around
 shopt -s dotglob
 
@@ -61,6 +51,9 @@ curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
 PHP_URL="${BUILDPACK_BINARIES}/php-$PHP_VERSION""$heroku_rev"".tar.gz"
 echo "-----> Bundling PHP version $PHP_VERSION"
 curl --silent --max-time 60 --location "$PHP_URL" | tar xz
+
+# install apache modules
+cp $LP_DIR/conf/modules $APACHE_PATH/modules
 
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
