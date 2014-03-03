@@ -53,10 +53,10 @@ echo "-----> Bundling PHP version $PHP_VERSION"
 curl --silent --max-time 60 --location "$PHP_URL" | tar xz
 
 # install apache modules
-cp $LP_DIR/conf/modules $APACHE_PATH/modules
+cp $LP_DIR/conf/modules /app/apache/modules
 
 # update config files
-cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
+cp $LP_DIR/conf/httpd.conf /app/apache/conf
 cp $LP_DIR/conf/php.ini php
 
 # make php available on bin
