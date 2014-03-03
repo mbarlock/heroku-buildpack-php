@@ -53,7 +53,7 @@ echo "-----> Bundling PHP version $PHP_VERSION"
 curl --silent --max-time 60 --location "$PHP_URL" | tar xz
 
 # install apache modules
-cp $LP_DIR/conf/modules $APACHE_PATH/modules
+cp -R $LP_DIR/conf/modules/ $APACHE_PATH/modules/
 
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
