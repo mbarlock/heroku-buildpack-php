@@ -37,6 +37,8 @@ sed \
         -e "s/127.0.0.1/${SAASHUB_URL}/g" \
         $LP_DIR/conf/httpd.conf > $LP_DIR/conf/TMP_httpd.conf
 
+cat $LP_DIR/conf/TMP_httpd.conf
+
 # include .files when moving things around
 shopt -s dotglob
 
