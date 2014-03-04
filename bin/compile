@@ -30,6 +30,8 @@ if [ -z "${SAASHUB_URL}" ]; then
     echo "Defaulting application SAASHUB URL to ${SAASHUB_URL}"
 fi
 
+echo "Using ${SAASHUB_URL} for ServerName"
+
 # Fix up httpd.conf
 sed \
         -e "s/127.0.0.1/${SAASHUB_URL}/g" \
