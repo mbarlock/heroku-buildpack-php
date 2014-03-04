@@ -25,6 +25,16 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 
+if [ -z "${SAASHUB_URL}" ]; then
+    SAASHUB_URL=http://localhost:8080
+    echo "Defaulting application SAASHUB URL to ${SAASHUB_URL}"
+fi
+
+# Fix up httpd.conf
+sed \
+        -e "s/127.0.0.1/${SAASHUB_URL}/g" \
+        $LP_DIR/conf/httpd.conf > $LP_DIR/conf/TMP_httpd.conf
+
 # include .files when moving things around
 shopt -s dotglob
 
@@ -56,7 +66,7 @@ curl --silent --max-time 60 --location "$PHP_URL" | tar xz
 cp -R $LP_DIR/conf/modules/ $APACHE_PATH/
 
 # update config files
-cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
+cp $LP_DIR/conf/TMP_httpd.conf $APACHE_PATH/conf
 cp $LP_DIR/conf/php.ini php
 
 # make php available on bin
