@@ -52,9 +52,6 @@ PHP_URL="${BUILDPACK_BINARIES}/php-$PHP_VERSION""$heroku_rev"".tar.gz"
 echo "-----> Bundling PHP version $PHP_VERSION"
 curl --silent --max-time 60 --location "$PHP_URL" | tar xz
 
-# install apache modules
-cp -R $LP_DIR/conf/modules/ $APACHE_PATH/
-
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
 cp $LP_DIR/conf/php.ini php
