@@ -78,7 +78,7 @@ can be downloaded by the build pack (see the URIs in `compile`).
 
     # Build and install Apache.
     pushd $httpd_dirname
-    ./configure --prefix=/app/apache --enable-rewrite --with-included-apr
+    ./configure --prefix=/app/apache --enable-rewrite --with-included-apr --enable-ssl --enable-so --enable-mods-shared="proxy proxy_http proxy_ftp proxy_connect"
     make -s
     make install -s
     popd
